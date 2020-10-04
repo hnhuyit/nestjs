@@ -1,4 +1,4 @@
-import { Controller, Get , Request, Post, UseGuards} from '@nestjs/common';
+import { Controller, Get , Request, Post, UseGuards, Redirect, Param, Render} from '@nestjs/common';
 import { AppService } from './app.service';
 import { AuthGuard } from '@nestjs/passport';
 import { LocalAuthGuard } from './auth/local-auth.guard';
@@ -13,10 +13,28 @@ export class AppController {
     private authService: AuthService
     ) {}
 
+  // @Get()
+  // getHello(): string {
+  //   return this.appService.getHello();
+  // }
+
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Render('index.hbs')
+  root() {
+    return { message: 'Hello World' };
   }
+
+  // @Get(':id')
+  // findOne(@Param() params): string {
+  //   console.log(params.id);
+  //   return `This action returns a #${params.id} cat`;
+  // }
+
+  // @Get('ab*cd')
+  // @Redirect('https://nestjs.com', 301)
+  // findAll() {
+  //   return 'This route uses a wildcard';
+  // }
 
   // @Get('/kaka')
   // getIndex(): string {
